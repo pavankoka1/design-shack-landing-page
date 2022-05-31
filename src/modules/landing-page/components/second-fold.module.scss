@@ -1,0 +1,38 @@
+.wrapper {
+    position: relative;
+    width: 1184px;
+    margin: 0 auto 96px;
+}
+
+.testimonial {
+    width: 580px;
+    border: 2px dashed #606060;
+    border-radius: 20px;
+    padding: 40px 24px 48px;
+    height: fit-content;
+
+    .head {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+
+        .name {
+            margin-left: 16px;
+
+            font-family: 'Raleway';
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28px;
+            color: #383838;
+        }
+    }
+
+    .desc {
+        width: 532px;
+        font-family: 'Raleway';
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 28px;
+        color: #606060;
+    }
+}
