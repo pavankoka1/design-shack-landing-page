@@ -6,6 +6,8 @@ import ThirdFold from './components/third-fold'
 import FourthFold from './components/fourth-fold'
 import FifthFold from './components/fifth-fold'
 import SixthFold from './components/sixth-fold'
+import ContactUs from './components/contactUs'
+import Footer from './components/footer'
 
 import styles from './index.module.scss'
 
@@ -19,6 +21,8 @@ function LandingPage() {
       <FourthFold />
       <FifthFold />
       <SixthFold />
+      <ContactUs />
+      <Footer />
     </div>
   )
 }
