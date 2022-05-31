@@ -1,0 +1,23 @@
+.wrapper {
+    position: relative;
+    width: 1184px;
+    margin: 0 auto 96px;
+
+    .header {
+        font-family: 'Fraunces';
+        font-weight: 400;
+        font-size: 48px;
+        line-height: 59px;
+        color: #383838;
+        margin-bottom: 24px;
+    }
+
+    .text {
+        font-family: 'Fraunces';
+        font-weight: 300;
+        font-size: 28px;
+        line-height: 35px;
+        color: #606060;
+        margin-bottom: 32px;
+    }
+}
