@@ -5,17 +5,12 @@
     margin: 68px auto 45px;
 
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
-
-    .rightImage {
-        position: absolute;
-        top: 0;
-        right: -100px;
-    }
+    align-items: center;
 
     .content {
-        width: 100%;
+        width: 60%;
         height: fit-content;
 
         .heading {
