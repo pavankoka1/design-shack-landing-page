@@ -34,6 +34,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import PersonIcon from '@mui/icons-material/Person';
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -164,17 +165,20 @@ const ResponsiveAppBar = () => {
                         >
                             <img src={DESIGN_SHACK} alt="logo" />
                         </Typography>
-                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                        <Box sx={{ display: { xs: "none", md: "flex" }, gap: '24px' }}>
                             {pages.map((page) => (
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
                                     sx={{
                                         my: 2,
-                                        color: "black",
-                                        display: "block",
+                                        color: page !== 'Sign Up' ? "black" : '',
+                                        display: "flex",
                                         marginLeft: "auto",
                                     }}
+                                    size="large"
+                                    color={page === 'Sign Up' ? 'error' : 'primary'}
+                                    startIcon={page === 'Sign Up' ? <PersonIcon /> : null}
                                 >
                                     {page}
                                 </Button>
