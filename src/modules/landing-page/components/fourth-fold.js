@@ -3,9 +3,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import RIGHT_IMAGE from 'assets/images/fourth-fold-right.svg';
 
-function ThirdFold() {
+function FourthFold() {
     return (
-        <Grid container spacing={8} alignItems="center">
+        <Grid container spacing={8} alignItems="center" mt={{ xs: 2, lg: 0 }}>
             <Grid container item lg={6} sm={12} spacing={4} direction="column">
                 <Grid item>
                     <Typography
@@ -13,7 +13,18 @@ function ThirdFold() {
                         sx={{
                             fontFamily: 'Fraunces',
                             color: '#383838',
-                            textAlign: 'right',
+                            textAlign: {
+                                xs: 'left',
+                                lg: 'right',
+                            },
+                            fontSize: {
+                                xs: '36px',
+                                lg: '48px',
+                            },
+                            lineHeight: {
+                                xs: '44px',
+                                lg: '60px',
+                            },
                         }}>
                         Get variation for a
                         <br /> starting image
@@ -26,7 +37,18 @@ function ThirdFold() {
                             fontFamily: 'Raleway',
                             color: '#383838',
                             fontWeight: 300,
-                            textAlign: 'right',
+                            textAlign: {
+                                xs: 'left',
+                                lg: 'right',
+                            },
+                            fontSize: {
+                                xs: '16px',
+                                lg: '20px',
+                            },
+                            lineHeight: {
+                                xs: '20px',
+                                lg: '24px',
+                            },
                         }}>
                         You can either use your own image or one that is
                         generated to get new images or more variations which are
@@ -49,4 +71,4 @@ function ThirdFold() {
     );
 }
 
-export default ThirdFold;
+export default FourthFold;

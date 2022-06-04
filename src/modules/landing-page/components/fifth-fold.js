@@ -6,7 +6,7 @@ import LEFT_IMAGE from 'assets/images/fifth-fold-left.svg';
 
 function ThirdFold() {
     return (
-        <Grid container my={16} alignItems="center" spacing={8}>
+        <Grid container my={{ xs: 4, lg: 16 }} alignItems="center" spacing={8}>
             <Grid item lg={6} sm={12}>
                 <img src={LEFT_IMAGE} alt="right" width="100%" />
             </Grid>
@@ -17,6 +17,14 @@ function ThirdFold() {
                         sx={{
                             fontFamily: 'Fraunces',
                             color: '#383838',
+                            fontSize: {
+                                xs: '36px',
+                                lg: '48px',
+                            },
+                            lineHeight: {
+                                xs: '44px',
+                                lg: '60px',
+                            },
                         }}>
                         Apply new styles to any image
                     </Typography>
@@ -28,6 +36,14 @@ function ThirdFold() {
                             fontFamily: 'Raleway',
                             color: '#383838',
                             fontWeight: 300,
+                            fontSize: {
+                                xs: '16px',
+                                lg: '20px',
+                            },
+                            lineHeight: {
+                                xs: '20px',
+                                lg: '24px',
+                            },
                         }}>
                         Use a image you have and apply contextual styles from
                         our library or a custom style from an image of your own

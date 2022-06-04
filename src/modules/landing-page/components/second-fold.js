@@ -35,7 +35,14 @@ function Testimonial({ icon, name, desc }) {
                             fontFamily: 'Raleway',
                             fontWeight: '400',
                             color: '#383838',
-                            lineHeight: '28px',
+                            fontSize: {
+                                xs: '16px',
+                                lg: '24px',
+                            },
+                            lineHeight: {
+                                xs: '20px',
+                                lg: '28px',
+                            },
                         }}>
                         {name}
                     </Typography>
@@ -48,7 +55,14 @@ function Testimonial({ icon, name, desc }) {
                         fontFamily: 'Raleway',
                         fontWeight: '400',
                         color: '#606060',
-                        lineHeight: '28px',
+                        fontSize: {
+                            xs: '20px',
+                            lg: '24px',
+                        },
+                        lineHeight: {
+                            xs: '28px',
+                            lg: '28px',
+                        },
                     }}>
                     {desc}
                 </Typography>
