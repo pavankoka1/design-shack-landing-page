@@ -80,20 +80,18 @@ function SecondFold() {
                     name="Wade Warren (Designer)"
                     desc="DS helps me in rapifly prototype my ideas and generate mood boards in few hours compared to days previously"
                 />
-                <div style={{ marginTop: '72px' }}>
+                <Grid item mt={{ lg: 8, xs: 4 }}>
                     <Testimonial
                         icon={TESTIMONIAL_2}
                         name="Wade Warren (Designer)"
                         desc="DS helps me in rapifly prototype my ideas and generate mood boards in few hours compared to days previously"
                     />
-                </div>
+                </Grid>
             </Grid>
             <Grid
                 item
-                sx={{
-                    marginLeft: {
-                        lg: '90px',
-                    },
+                ml={{
+                    lg: 12,
                 }}>
                 <Testimonial
                     icon={TESTIMONIAL_3}

@@ -147,7 +147,7 @@ const ResponsiveAppBar = () => {
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}>
-                            <img src={DESIGN_SHACK} alt="logo" />
+                            <img src={DESIGN_SHACK} width={160} alt="logo" />
                         </Typography>
                         <Box
                             sx={{

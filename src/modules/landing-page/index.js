@@ -35,8 +35,8 @@ function LandingPage() {
                 <FifthFold />
                 <SixthFold />
                 <ContactUs />
-                <Footer />
             </Wrapper>
+            <Footer />
         </>
     );
 }
