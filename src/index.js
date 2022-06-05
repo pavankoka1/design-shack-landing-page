@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
+import Box from '@mui/material/Box';
+import styled from '@mui/material/styles/styled';
 import LandingPage from 'modules/landing-page';
 import CreateNow from 'modules/create-now';
+import Navbar from 'modules/landing-page/components/Navbar';
+import Footer from 'modules/landing-page/components/footer';
 import reportWebVitals from './reportWebVitals';
+
+import './index.scss';
 
 import {
     BrowserRouter as Router,
@@ -11,14 +16,29 @@ import {
     Route,
 } from 'react-router-dom';
 
+const Wrapper = styled(Box)(({ theme }) => ({
+    fontFamily: 'Raleway',
+    width: 1184,
+    margin: '0 auto',
+    [theme.breakpoints.down('md')]: {
+        width: '100vw',
+        padding: '0 20px',
+        overflow: 'hidden',
+    },
+}));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Router>
-            <Switch>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/craete-now" element={<CreateNow />} />
-            </Switch>
+            <Navbar />
+            <Wrapper>
+                <Switch>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/create-now" element={<CreateNow />} />
+                </Switch>
+            </Wrapper>
+            <Footer />
         </Router>
     </React.StrictMode>,
 );
