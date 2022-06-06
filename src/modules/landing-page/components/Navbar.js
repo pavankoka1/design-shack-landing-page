@@ -30,6 +30,7 @@ import DESIGN_SHACK from 'assets/logos/design-shack.svg';
 // export default Navbar
 
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -64,6 +65,8 @@ const ResponsiveAppBar = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    function handleNavItemClick(link) {}
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -155,28 +158,43 @@ const ResponsiveAppBar = () => {
                                 gap: '24px',
                             }}>
                             {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{
-                                        fontFamily: 'Raleway',
-                                        my: 2,
-                                        color:
-                                            page !== 'Sign Up' ? 'black' : '',
-                                        display: 'flex',
-                                        marginLeft: 'auto',
-                                    }}
-                                    size="large"
-                                    color={
-                                        page === 'Sign Up' ? 'error' : 'primary'
-                                    }
-                                    startIcon={
-                                        page === 'Sign Up' ? (
-                                            <PersonIcon />
-                                        ) : null
-                                    }>
-                                    {page}
-                                </Button>
+                                <Link
+                                    to={page.toLowerCase().split(' ').join('-')}
+                                    style={{ textDecoration: 'none' }}>
+                                    <Button
+                                        key={page}
+                                        onClick={() =>
+                                            handleNavItemClick(
+                                                page
+                                                    .toLowerCase()
+                                                    .split(' ')
+                                                    .join('-'),
+                                            )
+                                        }
+                                        sx={{
+                                            fontFamily: 'Raleway',
+                                            my: 2,
+                                            color:
+                                                page !== 'Sign Up'
+                                                    ? 'black'
+                                                    : '',
+                                            display: 'flex',
+                                            marginLeft: 'auto',
+                                        }}
+                                        size="large"
+                                        color={
+                                            page === 'Sign Up'
+                                                ? 'error'
+                                                : 'primary'
+                                        }
+                                        startIcon={
+                                            page === 'Sign Up' ? (
+                                                <PersonIcon />
+                                            ) : null
+                                        }>
+                                        {page}
+                                    </Button>
+                                </Link>
                             ))}
                         </Box>
                     </Toolbar>
