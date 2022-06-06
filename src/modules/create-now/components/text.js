@@ -70,7 +70,6 @@ function Text() {
             container
             direction="column"
             py={{ xs: 2, lg: 8 }}
-            px={{ xs: 2, lg: 4 }}
             xs={12}
             spacing={2}>
             <Grid item>
