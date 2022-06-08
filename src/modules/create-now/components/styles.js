@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { Button, Typography, Grid, Box, Tabs, Tab } from '@mui/material';
+import { Button, Typography, Grid, Box, Tabs, Tab, Stack } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme, styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -29,6 +29,37 @@ const keywords = [
     },
 ];
 
+const stylesText = [
+    <>
+        Child's
+        <br />
+        Drawing
+    </>,
+    <>
+        Cubist
+        <br />
+        Style
+    </>,
+    <>
+        Arcylic
+        <br />
+        Art
+    </>,
+    <>
+        Pencil <br /> Sketching
+    </>,
+    <>
+        Oil
+        <br />
+        Painting
+    </>,
+    <>
+        Watercolor
+        <br />
+        Painting
+    </>,
+];
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -40,8 +71,8 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}>
             {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                <Box py={{ xs: 2, lg: 3 }} px={1}>
+                    {children}
                 </Box>
             )}
         </div>
@@ -71,16 +102,13 @@ const useStyles = makeStyles(() => ({
             backgroundColor: '#FF624F',
             fontFamily: 'Fraunces',
             fontWeight: 300,
-            fontSize: '24px',
-            lineHeight: '30px',
             color: '#383838',
         },
         '& .MuiTab-root': {
             fontFamily: 'Fraunces',
             fontWeight: 300,
-            fontSize: '24px',
-            lineHeight: '30px',
             color: '#383838',
+            textTransform: 'capitalise',
         },
         '& .MuiTab-root.Mui-selected': {
             color: '#383838',
@@ -94,6 +122,7 @@ function Styles() {
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('lg'));
 
     const [selectedTab, setSelectedTab] = useState(0);
+    const [selectedStyle, setSelectedStyle] = useState(3);
     const [selectedKeywords, setSelectedKeywords] = useState([]);
 
     function handleTabChange(event, newTab) {
@@ -121,7 +150,7 @@ function Styles() {
             py={{ xs: 2, lg: 8 }}
             px={{ xs: 2, lg: 4 }}
             xs={12}
-            spacing={2}
+            m={0}
             sx={{
                 boxShadow: '0px 0px 23px rgba(0, 0, 0, 0.1)',
                 borderRadius: '16px',
@@ -132,19 +161,98 @@ function Styles() {
                     onChange={handleTabChange}
                     aria-label="basic tabs example"
                     className={tabClasses.tabs}
-                    TabIndicatorProps={{ className: tabClasses.indicator }}>
+                    TabIndicatorProps={{ className: tabClasses.indicator }}
+                    sx={{
+                        fontSize: {
+                            xs: '16px',
+                            lg: '24px',
+                        },
+                        lineHeight: {
+                            xs: '22px',
+                            lg: '30px',
+                        },
+                    }}>
                     <Tab label="Styles" />
                     <Tab label="Add Keywords" />
                 </Tabs>
             </Box>
             <TabPanel value={selectedTab} index={0}>
-                Styles
+                <Grid container spacing={2}>
+                    {[1, 2, 3, 4, 5, 6].map((id) => (
+                        <Grid
+                            item
+                            key={`styles-${id}`}
+                            sx={{ cursor: 'pointer' }}
+                            onClick={() => setSelectedStyle(id)}>
+                            <Stack
+                                sx={{
+                                    borderRadius: '8px',
+                                    overflow: 'hidden',
+                                }}
+                                alignItems="center">
+                                <Box
+                                    sx={{
+                                        width: '78px',
+                                        height: '78px',
+                                    }}>
+                                    <img
+                                        src={require(`assets/images/create-now/${id}.jpg`)}
+                                        style={{
+                                            objectFit: 'cover',
+                                        }}
+                                        height={78}
+                                        width={78}
+                                        alt="styles"
+                                    />
+                                </Box>
+                                <Box
+                                    sx={{
+                                        width: '100%',
+                                        borderRadius: '0 0 8px 8px',
+                                        border: '1px solid #606060',
+                                        textAlign: 'center',
+                                        backgroundColor:
+                                            id === selectedStyle
+                                                ? '#FF624F'
+                                                : '#fff',
+                                    }}
+                                    py={{
+                                        xs: 1,
+                                        lg: 1,
+                                    }}>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            fontFamily: 'Fraunces',
+                                            width: '40px',
+                                            fontSize: {
+                                                xs: '8px',
+                                                lg: '10px',
+                                            },
+                                            letterSpacing: 0,
+                                            color:
+                                                id === selectedStyle
+                                                    ? '#fff'
+                                                    : '#383838',
+                                            fontWeight: '300',
+                                            whiteSpace: 'pre-line',
+                                            wordWrap: 'break-word',
+                                        }}
+                                        mx="auto">
+                                        {stylesText[id - 1]}
+                                    </Typography>
+                                </Box>
+                            </Stack>
+                        </Grid>
+                    ))}
+                </Grid>
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
                 <Grid item container spacing={1} alignItems="center">
                     {keywords.map((item) => (
                         <Grid item id={item.id}>
                             <Pill
+                                size={isSmallDevice ? 'small' : 'medium'}
                                 variant={
                                     selectedKeywords.includes(item.id)
                                         ? 'contained'

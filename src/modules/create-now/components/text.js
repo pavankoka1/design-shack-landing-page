@@ -71,7 +71,9 @@ function Text() {
             direction="column"
             py={{ xs: 2, lg: 8 }}
             xs={12}
-            spacing={2}>
+            rowGap={2}
+            // spacing={2}
+        >
             <Grid item>
                 <Typography
                     variant="p"
@@ -120,6 +122,7 @@ function Text() {
                 {suggestions.map((item) => (
                     <Grid item id={item.id}>
                         <Pill
+                            size={isSmallDevice ? 'small' : 'medium'}
                             variant={
                                 selectedSuggestions.includes(item.id)
                                     ? 'contained'
