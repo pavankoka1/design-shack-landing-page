@@ -8,6 +8,7 @@ import {
     Switch,
     Stack,
     Checkbox,
+    Slider,
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme, styled } from '@mui/material/styles';
@@ -31,11 +32,58 @@ const Pill = styled(Button)({
     },
 });
 
-const FieldHeader = ({ text }) => (
+const SliderWrapper = styled(Slider)({
+    '.MuiSlider-markLabel': {
+        fontFamily: 'Raleway',
+        color: '#383838',
+    },
+    '.MuiSlider-track': {
+        color: '#FCBFB8',
+    },
+    '.MuiSlider-thumb': {
+        color: '#FF624F',
+    },
+});
+
+const CheckboxWrapper = styled(Checkbox)({
+    '&.Mui-checked': {
+        color: '#FF624F',
+    },
+});
+
+const SwitchWrapper = styled(Switch)({
+    '.MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track': {
+        backgroundColor: '#FFA297',
+    },
+    '.MuiSwitch-switchBase.Mui-checked': {
+        color: '#FF624F',
+    },
+});
+
+const sliderMarks = [
+    {
+        value: 1,
+        label: 'weak',
+    },
+    {
+        value: 5,
+        label: 'normal',
+    },
+    {
+        value: 12,
+        label: 'strong',
+    },
+    {
+        value: 15,
+        label: '',
+    },
+];
+
+const FieldHeader = ({ text, noMargin }) => (
     <Typography
         variant="p"
         sx={{
-            marginBottom: '8px',
+            marginBottom: noMargin ? 0 : '8px',
             fontFamily: 'Fraunces',
             fontSize: {
                 xs: '16px',
@@ -83,7 +131,7 @@ function Advanced() {
     const [increaseResolution, setIncreaseResolution] = useState(false);
     const [textPrompt, setTextPrompt] = useState(1);
     const [uploadedImage, setUploadedImage] = useState(null);
-    const [imagePrompt, setImagePrompt] = useState(1);
+    const [imagePrompt, setImagePrompt] = useState(5);
     const [noOfImages, setNoOfImages] = useState(8);
 
     function handleToggle(e, value) {
@@ -117,7 +165,7 @@ function Advanced() {
                         <Header text="Adavance options" />
                     </Grid>
                     <Grid item>
-                        <Switch
+                        <SwitchWrapper
                             checked={showAdvancedOptions}
                             onChange={handleToggle}
                         />
@@ -326,43 +374,21 @@ function Advanced() {
                                 </Dropzone>
                             </Stack>
                         </Grid>
-                        {uploadedImage ? (
+                        {!uploadedImage ? (
                             <Grid item>
-                                <Stack>
-                                    {
-                                        <FieldHeader text="Influence of Image Prompt" />
-                                    }
-                                    <Grid
-                                        container
-                                        rowSpacing={1}
-                                        columnSpacing={2}
-                                        alignItems="center"
-                                        mt={{ xs: 1, lg: 1 }}>
-                                        {prompts.map((value, index) => (
-                                            <Grid
-                                                item
-                                                key={`image-prompt-${value}`}>
-                                                <Pill
-                                                    variant={
-                                                        imagePrompt === index
-                                                            ? 'contained'
-                                                            : 'outlined'
-                                                    }
-                                                    size="small"
-                                                    onClick={() =>
-                                                        setImagePrompt(index)
-                                                    }
-                                                    endIcon={
-                                                        imagePrompt ===
-                                                        index ? (
-                                                            <DoneIcon />
-                                                        ) : null
-                                                    }>
-                                                    {value}
-                                                </Pill>
-                                            </Grid>
-                                        ))}
-                                    </Grid>
+                                <Stack spacing={2}>
+                                    <FieldHeader text="Influence of Image Prompt" />
+                                    <SliderWrapper
+                                        onChange={(e, value) =>
+                                            setImagePrompt(value)
+                                        }
+                                        value={imagePrompt}
+                                        step={1}
+                                        min={0}
+                                        max={15}
+                                        marks={sliderMarks}
+                                        valueLabelDisplay="auto"
+                                    />
                                 </Stack>
                             </Grid>
                         ) : null}
@@ -372,17 +398,20 @@ function Advanced() {
             <Grid item ml={{ xs: 1, lg: 2 }}>
                 <Stack
                     direction="row"
-                    mb={{ xs: 1, lg: 3 }}
                     spacing={1}
-                    alignItems="center">
-                    <FieldHeader text="Increse Resolution" />
-                    <Checkbox
+                    alignItems="center"
+                    mb={{ xs: 2 }}>
+                    <FieldHeader text="Increse Resolution" noMargin />
+                    <CheckboxWrapper
                         mb={{ xs: 4, lg: 1 }}
                         checked={increaseResolution}
                         onChange={(e, value) => setIncreaseResolution(value)}
                     />
                 </Stack>
-                <Button variant="contained" color="warning" size="large">
+                <Button
+                    variant="contained"
+                    color="warning"
+                    size={isSmallDevice ? 'small' : 'large'}>
                     Generate
                 </Button>
             </Grid>

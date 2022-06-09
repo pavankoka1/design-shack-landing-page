@@ -31,6 +31,7 @@ import DESIGN_SHACK from 'assets/logos/design-shack.svg';
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { signupUrl } from 'apis';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -66,7 +67,12 @@ const ResponsiveAppBar = () => {
         setAnchorElNav(null);
     };
 
-    function handleNavItemClick(link) {}
+    function handleNavItemClick(link) {
+        const { location } = window;
+        if (link === 'sign-up') {
+            location.href = signupUrl;
+        }
+    }
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -124,9 +130,9 @@ const ResponsiveAppBar = () => {
                                 sx={{
                                     display: { xs: 'block', md: 'none' },
                                 }}>
-                                {pages.map((page) => (
+                                {pages.map((page, index) => (
                                     <MenuItem
-                                        key={page}
+                                        key={`page-${index}`}
                                         onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">
                                             {page}
