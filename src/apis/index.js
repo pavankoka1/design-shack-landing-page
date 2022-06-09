@@ -22,15 +22,14 @@ axiosClient.defaults.baseURL = baseURL[process.env.NODE_ENV];
 axiosClient.defaults.headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     Authorization: 'Bearer ' + localStorage.getItem('access_token'),
 };
 
-//All request will wait 2 seconds before timeout
+//All request will wait 5 seconds before timeout
 axiosClient.defaults.timeout = 5000;
-
-axiosClient.defaults.withCredentials = true;
 
 export function get(url) {
     return axiosClient.get(url).then((res) => toCamelCase(res));
@@ -39,5 +38,5 @@ export function get(url) {
 export function post(url, payload) {
     return axiosClient
         .post(url, toSnakeCase(payload))
-        .then((res) => toCamelCase(res));
+        .then((res) => toCamelCase(res.data));
 }

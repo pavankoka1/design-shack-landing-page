@@ -41,16 +41,16 @@ function CreateNow() {
 
     async function getImages() {
         const request = {
-            prompt: '',
-            negative_prompt: '',
-            width: '',
-            height: '',
-            guidance_scale: '',
-            batch_size: '',
+            batch_size: 4,
+            guidance_scale: 5,
+            height: 256,
             init_image: '',
-            skip_timesteps: '',
+            negative_prompt: '',
+            prompt: 'New York skyline in Cubist style by Pablo Picasso',
+            skip_timesteps: 0,
+            steps: 25,
             upscaler: '',
-            steps: '',
+            width: 256,
         };
         const response = await post('glid-3-xl-jack', request);
         console.log('response', response);
