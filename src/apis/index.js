@@ -8,7 +8,7 @@ const baseURL = {
     development: 'https://7too5stg71.execute-api.ap-south-1.amazonaws.com/',
     production: 'https://7too5stg71.execute-api.ap-south-1.amazonaws.com/',
 };
-const appUrl = baseURL[process.env.NODE_ENV];
+export const appUrl = baseURL[process.env.NODE_ENV];
 const defaultRedirectUrl = appUrl + 'create-now';
 const hostedUIUrl = 'https://user.theprintscompany.com';
 const clientIDStr =
@@ -21,15 +21,15 @@ axiosClient.defaults.baseURL = baseURL[process.env.NODE_ENV];
 
 axiosClient.defaults.headers = {
     'Content-Type': 'application/json',
-    Accept: 'application/json',
-    'Access-Control-Allow-Credentials': true,
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    // Accept: 'application/json',
+    // 'Access-Control-Allow-Credentials': true,
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     Authorization: 'Bearer ' + localStorage.getItem('access_token'),
 };
 
 //All request will wait 5 seconds before timeout
-axiosClient.defaults.timeout = 5000;
+// axiosClient.defaults.timeout = 5000;
 
 export function get(url) {
     return axiosClient.get(url).then((res) => toCamelCase(res));

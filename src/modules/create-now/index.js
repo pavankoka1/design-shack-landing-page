@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Text from './components/text';
 import Styles from './components/styles';
 import Advanced from './components/advanced';
-import { post } from 'apis';
-
-const baseURL = {
-    development: 'http://localhost:1729/',
-    production: 'https://design-shack.netlify.app/',
-};
+import Images from './components/images';
+import { post, appUrl } from 'apis';
 
 function CreateNow() {
+    const [images, setImages] = useState([]);
     const token = localStorage.getItem('access_token');
 
     useEffect(() => {
@@ -28,7 +25,7 @@ function CreateNow() {
                 );
                 window.location.href = replacedUrl;
             } else {
-                window.location.href = baseURL[process.env.NODE_ENV];
+                window.location.href = appUrl;
             }
         }
     }, []);
@@ -53,12 +50,12 @@ function CreateNow() {
             width: 256,
         };
         const response = await post('glid-3-xl-jack', request);
-        console.log('response', response);
+        setImages(response.images);
     }
     return (
         <Grid
             container
-            spacing={{ xs: 2, lg: 4 }}
+            spacing={{ xs: 2, lg: 8 }}
             py={{ xs: 2, lg: 4 }}
             columns={12}>
             <Grid item xs={12} lg={6} m={0}>
@@ -67,7 +64,7 @@ function CreateNow() {
                 <Advanced />
             </Grid>
             <Grid item container xs={12} lg={6}>
-                {/* <Text /> */}
+                <Images images={images} />
             </Grid>
         </Grid>
     );
