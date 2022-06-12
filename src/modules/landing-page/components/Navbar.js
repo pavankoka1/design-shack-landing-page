@@ -74,6 +74,15 @@ const ResponsiveAppBar = () => {
         }
     }
 
+    function linkRedirect(page) {
+        const link = page.toLowerCase().split(' ').join('-');
+
+        if (link === 'about' || link === 'sign-up') {
+            return '/';
+        }
+        return link;
+    }
+
     return (
         <ThemeProvider theme={darkTheme}>
             <AppBar position="sticky" color="primary">
@@ -165,7 +174,7 @@ const ResponsiveAppBar = () => {
                             }}>
                             {pages.map((page) => (
                                 <Link
-                                    to={page.toLowerCase().split(' ').join('-')}
+                                    to={linkRedirect(page)}
                                     style={{ textDecoration: 'none' }}>
                                     <Button
                                         key={page}

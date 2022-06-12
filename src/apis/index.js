@@ -8,7 +8,13 @@ const baseURL = {
     development: 'https://7too5stg71.execute-api.ap-south-1.amazonaws.com/',
     production: 'https://7too5stg71.execute-api.ap-south-1.amazonaws.com/',
 };
-export const appUrl = baseURL[process.env.NODE_ENV];
+
+const signInUrl = {
+    development: 'http://localhost:1729/',
+    production: 'https://design-shack.netlify.app/',
+};
+
+export const appUrl = signInUrl[process.env.NODE_ENV];
 const defaultRedirectUrl = appUrl + 'create-now';
 const hostedUIUrl = 'https://user.theprintscompany.com';
 const clientIDStr =
