@@ -31,7 +31,7 @@ import DESIGN_SHACK from 'assets/logos/design-shack.svg';
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { signupUrl } from 'apis';
+import { loginUrl, logoutUrl } from 'apis';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -45,7 +45,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const pages = ['About', 'Create Now', 'Gallery', 'Sign Up'];
+const pages = ['About', 'Create Now', 'Gallery', 'Login'];
 
 const darkTheme = createTheme({
     palette: {
@@ -69,15 +69,21 @@ const ResponsiveAppBar = () => {
 
     function handleNavItemClick(link) {
         const { location } = window;
-        if (link === 'sign-up') {
-            location.href = signupUrl;
+        if (link === 'login') {
+            if (localStorage.getItem('access_token')) {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('id_token');
+                location.href = logoutUrl;
+            } else {
+                location.href = loginUrl;
+            }
         }
     }
 
     function linkRedirect(page) {
         const link = page.toLowerCase().split(' ').join('-');
 
-        if (link === 'about' || link === 'sign-up') {
+        if (link === 'about' || link === 'login') {
             return '/';
         }
         return link;
@@ -190,24 +196,25 @@ const ResponsiveAppBar = () => {
                                             fontFamily: 'Raleway',
                                             my: 2,
                                             color:
-                                                page !== 'Sign Up'
-                                                    ? 'black'
-                                                    : '',
+                                                page !== 'Login' ? 'black' : '',
                                             display: 'flex',
                                             marginLeft: 'auto',
                                         }}
                                         size="large"
                                         color={
-                                            page === 'Sign Up'
+                                            page === 'Login'
                                                 ? 'error'
                                                 : 'primary'
                                         }
                                         startIcon={
-                                            page === 'Sign Up' ? (
+                                            page === 'Login' ? (
                                                 <PersonIcon />
                                             ) : null
                                         }>
-                                        {page}
+                                        {localStorage.getItem('access_token') &&
+                                        page === 'Login'
+                                            ? 'Logout'
+                                            : page}
                                     </Button>
                                 </Link>
                             ))}

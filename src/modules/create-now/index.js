@@ -12,10 +12,11 @@ function CreateNow() {
     const token = localStorage.getItem('access_token');
 
     useEffect(() => {
-        if (!token) {
-            const queryString = window.location.hash.substring(1);
+        const queryString = window.location.hash.substring(1);
+        const urlParams = new URLSearchParams(queryString);
+
+        if (!token || urlParams.get('access_token')) {
             if (queryString !== '') {
-                const urlParams = new URLSearchParams(queryString);
                 const accessToken = urlParams.get('access_token');
                 const idToken = urlParams.get('id_token');
                 localStorage.setItem('id_token', idToken);
@@ -29,7 +30,7 @@ function CreateNow() {
                 window.location.href = appUrl;
             }
         }
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         if (token) {

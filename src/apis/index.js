@@ -9,19 +9,30 @@ const baseURL = {
     production: 'https://7too5stg71.execute-api.ap-south-1.amazonaws.com/',
 };
 
-const signInUrl = {
-    development: 'http://localhost:1729/',
-    production: 'https://design-shack.netlify.app/',
-};
+// const signInUrl = {
+//     development: 'http://localhost:1729/',
+//     stage: '',
+//     production: 'https://design-shack.netlify.app/',
+// };
 
-export const appUrl = signInUrl[process.env.NODE_ENV];
-const defaultRedirectUrl = appUrl + 'create-now';
+export const appUrl = window.location.origin;
+const defaultRedirectUrl = appUrl + '/create-now';
 const hostedUIUrl = 'https://user.theprintscompany.com';
 const clientIDStr =
     '?client_id=4atgirm1r8pqcpnkcoerso2hv6&response_type=token&scope=email+openid+phone';
 const redirectUrlStr = '&redirect_uri=' + encodeURI(defaultRedirectUrl);
 export const loginUrl = hostedUIUrl + '/login' + clientIDStr + redirectUrlStr;
 export const signupUrl = hostedUIUrl + '/signup' + clientIDStr + redirectUrlStr;
+export const logoutUrl =
+    hostedUIUrl +
+    '/logout' +
+    clientIDStr +
+    '&redirect_uri=' +
+    window.location.origin +
+    '/' +
+    // '/logout' +
+    '&logout_uri=' +
+    encodeURI(window.location.origin + '/');
 
 axiosClient.defaults.baseURL = baseURL[process.env.NODE_ENV];
 
