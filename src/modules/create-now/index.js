@@ -7,6 +7,7 @@ import Images from './components/images';
 import { post, appUrl } from 'apis';
 
 function CreateNow() {
+    const [loading, setLoading] = useState(false);
     const [images, setImages] = useState([]);
     const token = localStorage.getItem('access_token');
 
@@ -49,8 +50,10 @@ function CreateNow() {
             upscaler: '',
             width: 256,
         };
+        setLoading(true);
         const response = await post('glid-3-xl-jack', request);
         setImages(response.images);
+        setLoading(false);
     }
     return (
         <Grid
@@ -64,7 +67,7 @@ function CreateNow() {
                 <Advanced />
             </Grid>
             <Grid item container xs={12} lg={6}>
-                <Images images={images} />
+                <Images images={images} loading={loading} />
             </Grid>
         </Grid>
     );

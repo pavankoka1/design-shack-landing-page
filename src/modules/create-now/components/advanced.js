@@ -374,7 +374,7 @@ function Advanced() {
                                 </Dropzone>
                             </Stack>
                         </Grid>
-                        {!uploadedImage ? (
+                        {uploadedImage ? (
                             <Grid item>
                                 <Stack spacing={2}>
                                     <FieldHeader text="Influence of Image Prompt" />

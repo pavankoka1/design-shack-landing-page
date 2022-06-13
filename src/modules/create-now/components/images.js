@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash';
-import { saveAs } from 'file-saver';
-import { Grid, Typography, Stack, Backdrop } from '@mui/material';
+import { Grid, Typography, Stack, Backdrop, Box } from '@mui/material';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -26,7 +25,7 @@ const imagesMock = [
     },
 ];
 
-function Images({ images }) {
+function Images({ images, loading }) {
     const [overlayDisplay, setOverlayDisplay] = useState(-1);
     const [likedImages, setLikedImages] = useState([]);
 
@@ -48,6 +47,52 @@ function Images({ images }) {
             clonedArray.push(id);
         }
         setLikedImages(clonedArray);
+    }
+
+    if (loading) {
+        return (
+            <Stack my={{ lg: 8, xs: 2 }}>
+                <Typography
+                    variant="h6"
+                    sx={{
+                        fontFamily: 'Raleway',
+                        color: '#ff624f',
+                        fontWeight: 300,
+                        fontSize: {
+                            xs: '16px',
+                            lg: '20px',
+                        },
+                        lineHeight: {
+                            xs: '20px',
+                            lg: '24px',
+                        },
+                    }}
+                    mb={{ lg: 3, xs: 2 }}>
+                    Processing
+                </Typography>
+                <Grid container>
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map((id) => (
+                        <Grid
+                            item
+                            key={`image-processing-${id}`}
+                            xs={12}
+                            lg={6}>
+                            <Box
+                                sx={{
+                                    width: '256px',
+                                    maxWidth: '256px',
+                                    height: '256px',
+                                    background: '#ABA8A8',
+                                    filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))',
+                                    borderRadius: '8px',
+                                }}
+                                mb={3}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Stack>
+        );
     }
 
     return (
